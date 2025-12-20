@@ -9,7 +9,7 @@ sio = SocketIO()
 
 def create_app():
     app = Flask(__name__)
-    app.secret_key = uuid.uuid4()
+    app.secret_key = str(uuid.uuid4())
     
     app.register_blueprint(main_bp)
     
