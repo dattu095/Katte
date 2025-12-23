@@ -1,5 +1,5 @@
 import { render_waiting } from "./waiting.js";
-import { render_gameplay } from "./gameplay.js";
+import { render_gameplay } from "./gameplay/renderer.js";
 
 const sio = io();
 
