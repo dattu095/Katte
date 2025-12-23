@@ -43,6 +43,7 @@ class GameState:
             if ACE_OF_SPADES in self.hands.get(player):
                 self.next_turn(index)
                 break
+        self.leading_suit = 1
     
     def next_turn(self, i=None):
         if i is not None: 
