@@ -1,7 +1,5 @@
 import { render_waiting } from "./waiting.js";
 
-console.log(`${sessionStorage.getItem('username')}: ${sessionStorage.getItem('room_id')}`);
-
 const sio = io();
 
 sio.on('state', (data) => {
