@@ -14,9 +14,10 @@ export function create_pool(pool) {
     div.id = 'pool';
 
     pool.forEach(card => {
-        const c = document.createElement('p');
+        const c = document.createElement('button');
+        c.type = "button";
         c.innerText = `${card.value_name} of ${card.suit_name}`;
-        div.appendChild(c);
+        c.disabled = true;
     });
 
     const wrapper = document.createElement('div');
