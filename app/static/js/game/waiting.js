@@ -1,15 +1,16 @@
 /**
  * 
  * @param {HTMLDivElement} container 
+ * @param {String} username 
  * @param {String} room_id
  * @param {Array} players 
  * @param {Number} max_players 
  */
 
 
-export function render_waiting(container, room_id, players, max_players) {
+export function render_waiting(container, username, room_id, players, max_players) {
     const roomIdLable = document.createElement('label');
-    roomIdLable.innerHTML = `<b>Name: </b>${room_id}<br>`;
+    roomIdLable.innerHTML = `<b>Room Id: </b>${room_id}<br>`;
 
     const roomOccupency = document.createElement('label');
     roomOccupency.innerHTML = `<b>Occupency: </b>${players.length}/${max_players}<br>`;
@@ -17,7 +18,11 @@ export function render_waiting(container, room_id, players, max_players) {
     const playersList = document.createElement('ul');
     players.forEach(player => {
         const li = document.createElement('li');
-        li.textContent = player;
+        if (player === username) {
+            li.textContent = `${player} (you)`;
+        } else {
+            li.textContent = player;
+        }
         playersList.appendChild(li);
     });
 

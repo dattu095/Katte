@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<script type="text/javascript">
+    sessionStorage.setItem('username', '{{ name }}');
+    sessionStorage.setItem('room_id', '{{ room_id }}');
+</script>
+
 <div id="container"></div>
 <script type="module" src="{{ url_for('static', filename='js/game/view.js') }}"></script>
 
