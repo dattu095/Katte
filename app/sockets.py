@@ -23,6 +23,7 @@ def handle_connect():
         room.serialize(),
         to=room_id
     )
+    print(f"{room.serialize()}")
     
     if room.is_full():
         room.start_game()
@@ -31,3 +32,4 @@ def handle_connect():
             room.serialize(),
             to=room_id
         )
+        print(f"{room.serialize()}")
