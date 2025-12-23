@@ -1,5 +1,17 @@
 from flask import Blueprint, render_template, redirect, url_for, request, session
 
+from .sockets import room_manager
+
+
+def check_session(room_id=None):
+    if not session.get('username', ''):
+        return redirect(url_for('main.login'))
+    if not session.get('room_id', ''):
+        return redirect(url_for('main.lobby'))
+    if room_id:
+        if room_id != session.get('room_id'):
+            return redirect(url_for('main.lobby'))
+
 
 main_bp = Blueprint('main', __name__)
 
@@ -14,6 +26,8 @@ def dummy():
 
 @main_bp.route('/login', methods=['GET', 'POST'])
 def login():
+    check_session()
+    
     if request.method == 'POST':
         username = request.form.get('username', '')
         if username:
@@ -23,18 +37,26 @@ def login():
 
 @main_bp.route('/lobby', methods=['GET', 'POST'])
 def lobby():
-    if not session.get('username', ''):
-        return redirect(url_for('main.login'))
+    check_session()
     
     if request.method == 'POST':
-        room_id = request.form.get('room_id', '')
+        room_id = request.form.get('room_id', '').upper()
         if room_id:
             session['room_id'] = room_id
-            return redirect(url_for('main.dummy'))
+            return redirect(url_for('main.game', room_id=room_id))
     return render_template('lobby.html')
 
 @main_bp.route('/create', methods=['GET'])
 def create():
-    if not session.get('username', ''):
-        return redirect(url_for('main.login'))
-    return redirect(url_for('main.dummy'))
+    check_session()
+    
+    room_id = room_manager.create_room()
+    session['room_id'] = room_id
+
+    return redirect(url_for('main.game', room_id=room_id))
+
+@main_bp.route('/game/<room_id>', methods=['GET', 'POST'])
+def game(room_id):
+    check_session(room_id)
+    
+    return render_template('game.html', name=session.get('username'), room_id=session.get('room_id'))

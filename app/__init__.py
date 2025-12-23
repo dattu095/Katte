@@ -1,11 +1,9 @@
 import uuid
 from flask import Flask
-from flask_socketio import SocketIO
 
+from .sockets import sio
 from .routes import main_bp
 
-
-sio = SocketIO()
 
 def create_app():
     app = Flask(__name__)

@@ -1,3 +1,12 @@
+/**
+ * 
+ * @param {String} name 
+ * @param {String} placeholder 
+ * @param {String} type 
+ * @returns {HTMLFormElement}
+ */
+
+
 export function create_form(name, placeholder, type) {
     const form = document.createElement('form');
     form.method = 'post';
