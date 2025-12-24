@@ -52,9 +52,9 @@ class GameState:
             self.index = (self.index + 1) % self.no_of_players
 
     def play_card(self, player, card, mar):
-        card_obj = self.deck.create_card(card.get('value'), card.get('suit'))
+        card_obj = self.deck.create_card(card.get("value"), card.get("suit"))
         self.hands[player].remove(card_obj)
-        
+
         self.pool.append((self.index, card_obj))
         self.leading_suit = card_obj.suit.value
         self.next_turn()

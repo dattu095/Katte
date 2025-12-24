@@ -24,15 +24,16 @@ def handle_connect():
         room.start_game()
         emit("state", room.serialize(), to=room_id)
 
-@sio.on('play_card')
+
+@sio.on("play_card")
 def handle_play_card(data):
     print(f"{session.get('username')}: {data}")
-    
-    username = session.get('username')
-    room_id = session.get('room_id')
-    
+
+    username = session.get("username")
+    room_id = session.get("room_id")
+
     room = room_manager.get_room(room_id)
-    
-    room.game_state.play_card(username, data.get('card'), data.get('mar'))
-    
+
+    room.game_state.play_card(username, data.get("card"), data.get("mar"))
+
     emit("state", room.serialize(), to=room_id)

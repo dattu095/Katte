@@ -6,7 +6,7 @@ from .card import Card
 class Deck:
     def __init__(self):
         self.hand = self._create_deck()
-        
+
     def create_card(self, value, suit):
         return Card(value, suit)
 
