@@ -3,6 +3,10 @@ import { render_gameplay } from "./gameplay/renderer.js";
 
 const sio = io();
 
+function play_card(value, suit) {
+    sio.emit('play_card', {value: value, suit: suit});
+}
+
 sio.on('state', (data) => {
     console.log(`${data}`);
     if (data.started) {
@@ -12,7 +16,8 @@ sio.on('state', (data) => {
             data.game_state.turn,
             data.game_state.pool,
             data.game_state.leading_suit,
-            data.game_state.hands
+            data.game_state.hands,
+            play_card
         )
     } else {
         render_waiting(

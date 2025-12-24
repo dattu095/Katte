@@ -3,13 +3,14 @@
  * @param {Boolean} isturn 
  * @param {Number} leading_suit 
  * @param {Array} hand 
+ * @param {Function} play_card
  * @returns {HTMLDivElement}
  */
 
 import { valid_card, hand_has_ace } from "./rules.js";
 
 
-export function create_hand(isturn, leading_suit, hand) {
+export function create_hand(isturn, leading_suit, hand, play_card) {
     const label = document.createElement('label');
     label.htmlFor = 'hand';
     label.innerText = 'Hand: ';
@@ -22,6 +23,10 @@ export function create_hand(isturn, leading_suit, hand) {
         c.type = "button";
         c.innerText = `${card.value_name} of ${card.suit_name}`;
         c.disabled = (!valid_card(isturn, leading_suit, card, hand_has_ace(isturn, hand)));
+        c.onclick = (event) => {
+            event.preventDefault();
+            play_card(card.value, card.suit);
+        }
 
         div.appendChild(c)
     });
