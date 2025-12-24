@@ -18,6 +18,8 @@ export function create_pool(pool) {
         c.type = "button";
         c.innerText = `${card.value_name} of ${card.suit_name}`;
         c.disabled = true;
+
+        div.appendChild(c);
     });
 
     const wrapper = document.createElement('div');
