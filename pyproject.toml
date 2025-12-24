@@ -1,7 +1,7 @@
 [project]
 name = "katte"
 version = "0.1.0"
-description = "Add your description here"
+description = "Katte is a 4-player card game"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
