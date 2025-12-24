@@ -8,28 +8,20 @@ sio = SocketIO()
 room_manager = RoomManager()
 
 
-@sio.on('connect')
+@sio.on("connect")
 def handle_connect():
-    username = session.get('username')
-    room_id = session.get('room_id')
-    
+    username = session.get("username")
+    room_id = session.get("room_id")
+
     room = room_manager.get_room(room_id)
     room.add_player(request.sid, username)
-    
+
     join_room(room_id)
-    
-    emit(
-        'state',
-        room.serialize(),
-        to=room_id
-    )
+
+    emit("state", room.serialize(), to=room_id)
     print(f"{room.serialize()}")
-    
+
     if room.is_full():
         room.start_game()
-        emit(
-            'state',
-            room.serialize(),
-            to=room_id
-        )
+        emit("state", room.serialize(), to=room_id)
         print(f"{room.serialize()}")

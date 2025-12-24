@@ -16,6 +16,7 @@ class CardValue(Enum):
     king = 13
     ace = 14
 
+
 class CardSuit(Enum):
     Spades = 1
     Hearts = 2
@@ -27,20 +28,20 @@ class Card:
     def __init__(self, value, suit):
         self.value = CardValue(value)
         self.suit = CardSuit(suit)
-    
+
     def __str__(self):
         return f"{self.value.name} of {self.suit.name}"
-    
+
     def serialize(self):
         return {
-            'value': self.value.value,
-            'value_name': self.value.name,
-            'suit': self.suit.value,
-            'suit_name': self.suit.name
+            "value": self.value.value,
+            "value_name": self.value.name,
+            "suit": self.suit.value,
+            "suit_name": self.suit.name,
         }
 
     def __eq__(self, other):
         return self.value == other.value and self.suit == other.suit
-        
-        
+
+
 ACE_OF_SPADES = Card(14, 1)
