@@ -2,7 +2,6 @@ from flask import session, request
 from flask_socketio import SocketIO, join_room, emit
 
 from .room_manager import RoomManager
-from .room_manager.game_state.card import Card
 
 sio = SocketIO()
 
@@ -28,6 +27,14 @@ def handle_connect():
         print(f"{room.serialize()}")
 
 @sio.on('play_card')
-def handle_play_card(data):
-    card = Card(data.get('value'), data.get('suit'))
-    print(f"{session.get('username')} Played {card}")
+def handle_play_card(card):
+    username = session.get('username')
+    room_id = session.get('room_id')
+    
+    room = room_manager.get_room(room_id)
+    
+    room.game_state.play_card(username, card)
+    
+    emit("state", room.serialize(), to=room_id)
+    print(f"{room.game_state.pool}")
+    print(f"{room.serialize()}")

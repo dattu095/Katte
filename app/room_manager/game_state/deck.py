@@ -6,12 +6,15 @@ from .card import Card
 class Deck:
     def __init__(self):
         self.hand = self._create_deck()
+        
+    def create_card(self, value, suit):
+        return Card(value, suit)
 
     def _create_deck(self):
         deck = []
         for suit in range(1, 5):
             for value in range(2, 15):
-                deck.append(Card(value, suit))
+                deck.append(self.create_card(value, suit))
 
         return deck
 
