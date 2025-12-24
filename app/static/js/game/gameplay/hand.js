@@ -25,7 +25,7 @@ export function create_hand(isturn, leading_suit, hand, play_card) {
         c.disabled = (!valid_card(isturn, leading_suit, card, hand_has_ace(isturn, hand), hand_has_suit(hand, leading_suit)));
         c.onclick = (event) => {
             event.preventDefault();
-            play_card(card.value, card.suit);
+            play_card(card.value, card.suit, !hand_has_suit(hand, leading_suit));
         }
 
         div.appendChild(c)

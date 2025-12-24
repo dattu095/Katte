@@ -3,8 +3,8 @@ import { render_gameplay } from "./gameplay/renderer.js";
 
 const sio = io();
 
-function play_card(value, suit) {
-    sio.emit('play_card', {value: value, suit: suit});
+function play_card(value, suit, mar) {
+    sio.emit('play_card', {card: {value: value, suit: suit}, mar: mar});
 }
 
 sio.on('state', (data) => {

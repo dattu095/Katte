@@ -51,7 +51,7 @@ class GameState:
         else:
             self.index = (self.index + 1) % self.no_of_players
 
-    def play_card(self, player, card):
+    def play_card(self, player, card, mar):
         card_obj = self.deck.create_card(card.get('value'), card.get('suit'))
         self.hands[player].remove(card_obj)
         
